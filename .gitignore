@@ -8,6 +8,10 @@ helix-importer-ui
 *.bak
 .idea
 
+# Import build artifacts (regenerable via aem-import-bundle.sh)
+tools/importer/*.bundle.js
+tools/importer/reports/
+
 # Ensure these files are tracked
 !CLAUDE.md
 !AGENTS.md

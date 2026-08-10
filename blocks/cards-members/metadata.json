@@ -1,0 +1,40 @@
+{
+  "variantName": "cards-members",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-10T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/magazine.html",
+    "originPage": "WKND magazine landing page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "members-gated",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title + description + CTA",
+    "columnCount": 2,
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "gated / members-only teaser card grids",
+      "compact 2-up promotional card sets with a per-card CTA",
+      "sign-in-to-unlock content teasers"
+    ],
+    "notSuitableFor": [
+      "query-index-driven article listings (use article-list)",
+      "single boxed featured teasers (use columns-featured)",
+      "generic feature/product card grids without gating (use cards)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/magazine"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "projectType": "da"
+  },
+  "templates": [
+    {
+      "name": "home",
+      "urls": [
+        "https://wknd.site/us/en.html"
+      ],
+      "coverageGaps": [],
+      "description": "WKND site homepage. Hero carousel with rotating adventure slides, a featured magazine article teaser, a 'Recent Articles' image-list grid linking to magazine stories, a promotional adventure teaser (Climbing New Zealand), and a 'Where do you want to go?' image-list grid of adventure trips. Header and footer are shared experience fragments.",
+      "blocks": [
+        {
+          "name": "carousel-hero",
+          "instances": [
+            "div.carousel.cmp-carousel--hero"
+          ]
+        },
+        {
+          "name": "columns-featured",
+          "instances": [
+            "div.teaser.cmp-teaser--featured"
+          ]
+        },
+        {
+          "name": "article-list",
+          "instances": [
+            "body > div.root.container.responsivegrid > div.cmp-container > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > main.container.responsivegrid.aem-GridColumn.aem-GridColumn--default--12 > div.cmp-container > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > main.container.responsivegrid.cmp-layout-container--fixed.aem-GridColumn.aem-GridColumn--default--12:nth-of-type(1) > div.cmp-container > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.image-list.list.aem-GridColumn.aem-GridColumn--default--12",
+            "main.cmp-layout-container--fixed:nth-of-type(1) div.image-list.list"
+          ]
+        },
+        {
+          "name": "hero",
+          "instances": [
+            "div.teaser.cmp-teaser--hero.cmp-teaser--imagebottom"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "body > div.root.container.responsivegrid > div.cmp-container > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > main.container.responsivegrid.aem-GridColumn.aem-GridColumn--default--12 > div.cmp-container > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > main.container.responsivegrid.cmp-layout-container--fixed.aem-GridColumn.aem-GridColumn--default--12:nth-of-type(2) > div.cmp-container > div.aem-Grid.aem-Grid--12.aem-Grid--default--12 > div.image-list.list.aem-GridColumn.aem-GridColumn--default--12",
+            "main.cmp-layout-container--fixed:nth-of-type(2) div.image-list.list"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "magazine-landing",
+      "urls": [
+        "https://wknd.site/us/en/magazine.html"
+      ],
+      "coverageGaps": [],
+      "description": "Magazine landing/index page. Page title heading, a featured article teaser (Camping in Western Australia), an 'All Articles' image-list grid of article cards (image, title, description), and a 'Members Only' section with gated teaser cards. Header and footer are shared experience fragments.",
+      "blocks": [
+        {
+          "name": "columns-featured",
+          "instances": [
+            "div.teaser.cmp-teaser--featured"
+          ]
+        },
+        {
+          "name": "article-list",
+          "instances": [
+            "div.image-list.list"
+          ]
+        },
+        {
+          "name": "cards-members",
+          "instances": [
+            "div.teaser.cmp-teaser--list.cmp-teaser--secure"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "magazine-article",
+      "urls": [
+        "https://wknd.site/us/en/magazine/arctic-surfing.html",
+        "https://wknd.site/us/en/magazine/guide-la-skateparks.html",
+        "https://wknd.site/us/en/magazine/san-diego-surf.html",
+        "https://wknd.site/us/en/magazine/ski-touring.html",
+        "https://wknd.site/us/en/magazine/western-australia.html"
+      ],
+      "coverageGaps": [],
+      "description": "Magazine article detail page. Full-bleed lead image, breadcrumb navigation, article title and byline, long-form body content with headings, paragraphs and pull-quotes, an author bio block with social links, and a 'Share This Story' sidebar listing related articles. All five article URLs share a near-identical structure. Header and footer are shared experience fragments.",
+      "blocks": [
+        {
+          "name": "article-author",
+          "instances": [
+            "main .cmp-byline",
+            "div.byline.image"
+          ]
+        },
+        {
+          "name": "social-links",
+          "instances": [
+            "main .buildingblock.cmp-buildingblock--btn-list"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "about",
+      "urls": [
+        "https://wknd.site/us/en/about-us.html"
+      ],
+      "coverageGaps": [],
+      "description": "About Us page. Page title heading, an 'Our Contributors' section with intro text and a grid of contributor profile cards (name, role, social links), and a 'WKND Guides' section with intro text and a grid of guide profile cards. Header and footer are shared experience fragments.",
+      "blocks": [
+        {
+          "name": "cards-profile",
+          "instances": [
+            "section.experiencefragment.cmp-experience-fragment--contributor"
+          ]
+        }
+      ]
+    }
+  ]
+}

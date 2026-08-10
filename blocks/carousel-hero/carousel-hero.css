@@ -1,0 +1,234 @@
+/*
+ * carousel-hero — WKND full-bleed rotating hero.
+ * Source: cmp-carousel--hero on wknd.site (full-bleed image + white content
+ * panel overlapping the image bottom, Asar serif title, yellow CTA).
+ * Values extracted from getComputedStyle on the live source.
+ */
+
+/* full-bleed: override the section wrapper's 1200px cap + padding */
+.carousel-hero-container .carousel-hero-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.carousel-hero .carousel-hero-slides-container {
+  position: relative;
+}
+
+.carousel-hero .carousel-hero-slides,
+.carousel-hero nav .carousel-hero-slide-indicators {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-hero .carousel-hero-slides {
+  display: flex;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  overflow: scroll clip;
+}
+
+.carousel-hero .carousel-hero-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-hero .carousel-hero-slide {
+  position: relative;
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
+/* full-bleed image fills the slide width; cover-cropped like the source */
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image {
+  width: 100%;
+  line-height: 0;
+}
+
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image picture {
+  display: block;
+  width: 100%;
+}
+
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* white content panel overlapping the bottom of the image */
+.carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
+  position: relative;
+  z-index: 1;
+  margin: -40px 16px 0;
+  padding: 24px 20px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: left;
+}
+
+.carousel-hero .carousel-hero-slide-content h2 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.carousel-hero .carousel-hero-slide-content p {
+  margin: 12px 0 0;
+  font-size: var(--body-font-size-m);
+  line-height: 1.75;
+  color: var(--text-color);
+}
+
+/* CTA — authored as a plain link, styled as the WKND yellow button */
+.carousel-hero .carousel-hero-slide-content a:any-link {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--brand-color);
+  color: var(--text-color);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.carousel-hero .carousel-hero-slide-content a:hover {
+  background-color: var(--brand-hover-color);
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.carousel-hero .carousel-hero-slide-content a:focus-visible {
+  outline: 3px solid var(--text-color);
+  outline-offset: 2px;
+}
+
+/* slide indicator dots (below the hero, centered) */
+.carousel-hero nav .carousel-hero-slide-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin: 0;
+  padding: 20px 12px;
+  line-height: 0;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(32 32 32 / 30%);
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.carousel-hero .carousel-hero-slide-indicator button:disabled,
+.carousel-hero .carousel-hero-slide-indicator button:hover {
+  background-color: rgb(32 32 32 / 80%);
+}
+
+.carousel-hero .carousel-hero-slide-indicator button:focus-visible {
+  outline: 3px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
+/* prev / next controls overlaid on the image */
+.carousel-hero .carousel-hero-navigation-buttons {
+  position: absolute;
+  top: 40%;
+  right: 12px;
+  left: 12px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.carousel-hero .carousel-hero-navigation-buttons button {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background-color: rgb(32 32 32 / 45%);
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button:hover {
+  background-color: rgb(32 32 32 / 80%);
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button:focus-visible {
+  outline: 3px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(50% + 2px);
+  display: block;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #fff;
+  border-bottom: 0;
+  border-left: 0;
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.carousel-hero .carousel-hero-navigation-buttons button.slide-next::after {
+  left: calc(50% - 2px);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+@media (width >= 600px) {
+  .carousel-hero .carousel-hero-slide .carousel-hero-slide-image img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
+    margin: -90px 32px 0;
+    padding: 40px 36px;
+  }
+
+  .carousel-hero .carousel-hero-navigation-buttons {
+    right: 24px;
+    left: 24px;
+  }
+}
+
+@media (width >= 900px) {
+  .carousel-hero .carousel-hero-slide .carousel-hero-slide-image img {
+    aspect-ratio: 9 / 4;
+  }
+
+  .carousel-hero .carousel-hero-slide .carousel-hero-slide-content {
+    width: calc(100% - 96px);
+    max-width: 1080px;
+    margin: -150px auto 0;
+    padding: 40px 44px;
+  }
+}

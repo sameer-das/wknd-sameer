@@ -1,0 +1,38 @@
+{
+  "variantName": "article-author",
+  "baseBlock": null,
+  "version": "1.0.0",
+  "created": "2026-08-10T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/magazine/arctic-surfing.html",
+    "originPage": "WKND magazine article page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "author-byline",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "avatar image + name + role/title",
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "article/blog author bylines",
+      "contributor bio cards (single person)",
+      "writer/photographer credit blocks"
+    ],
+    "notSuitableFor": [
+      "grids of multiple contributor cards (use cards)",
+      "hero/banner author callouts"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/magazine/arctic-surfing"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T00:00:00.000Z"
+  }
+}
