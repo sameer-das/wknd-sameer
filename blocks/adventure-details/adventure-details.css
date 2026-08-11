@@ -1,0 +1,91 @@
+/*
+ * adventure-details — "Trip Details" info card.
+ *
+ * Typography extracted from the live WKND content-fragment panel
+ * (.cmp-contentfragment__elements) on adventure detail pages:
+ *   label  <dt>: 12px, uppercase, color #696969, Source Sans Pro
+ *   value  <dd>: weight 600, color #202020 (--text-color)
+ * The source container is unstyled; the bordered/striped card + WKND-yellow
+ * accent below is the intentional on-brand treatment for this block.
+ */
+
+.adventure-details {
+  margin: 0 0 32px;
+}
+
+/* Optional panel caption / heading (e.g. "Trip Details"). */
+.adventure-details .adventure-details-caption {
+  margin: 0 0 16px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+/* Card: subtle border with a WKND-yellow left accent. */
+.adventure-details .adventure-details-list {
+  max-width: 560px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--light-color);
+  border-left: 4px solid var(--brand-color);
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--background-color);
+}
+
+/* Key/value row — stacked on mobile. */
+.adventure-details .adventure-details-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Zebra striping for scannability. */
+.adventure-details .adventure-details-row:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+.adventure-details .adventure-details-row:last-child {
+  border-bottom: 0;
+}
+
+/* Label — uppercase, muted, bold (source: 12px / #696969). */
+.adventure-details .adventure-details-label {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #696969;
+}
+
+/* Value — body color, semibold (source: weight 600 / #202020). */
+.adventure-details .adventure-details-value {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+/* Tablet/desktop: spec-sheet layout — label left, value right. */
+@media (width >= 600px) {
+  .adventure-details .adventure-details-row {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 20px;
+  }
+
+  .adventure-details .adventure-details-value {
+    text-align: right;
+  }
+}
