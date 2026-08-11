@@ -36,6 +36,19 @@ export default function transform(hookName, element, payload) {
       '#mobileNav',
       '#destination_publishing_iframe_wkndsite_0',
     ]);
+
+    // Adventures landing: the "Current Adventures" grid is an AEM tabs component
+    // with an active "All" panel (16 cards) plus 6 category-subset panels that
+    // DUPLICATE those cards, and a tablist of category buttons. The
+    // adventure-list block is mapped to the active panel; the inactive panels +
+    // tablist would otherwise leak in as duplicate default content. Remove them
+    // BEFORE parsing so only the active panel (consumed by the block) remains.
+    // Verified in adventures-landing/cleaned.html: 7 .cmp-tabs__tabpanel (1
+    // --active), 1 .cmp-tabs__tablist. No-op on templates without tabs.
+    element.querySelectorAll('.cmp-tabs__tabpanel:not(.cmp-tabs__tabpanel--active)').forEach((el) => el.remove());
+    WebImporter.DOMUtils.remove(element, [
+      '.cmp-tabs__tablist',
+    ]);
   }
 
   if (hookName === TransformHook.afterTransform) {
