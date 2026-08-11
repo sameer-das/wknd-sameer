@@ -33,6 +33,31 @@ indices:
         value: |
           attribute(el, 'content')
 
+  # Adventures index — drives the dynamic adventure-list block.
+  adventures:
+    include:
+      - '/adventures/**'
+    exclude:
+      - '/adventures'
+    target: /adventures/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: |
+          attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: |
+          attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: |
+          match(attribute(el, 'content'), 'https:\/\/[^"]*')
+      lastModified:
+        select: none
+        value: |
+          parseTimestamp(headers('last-modified'), 'ddd, DD MMM YYYY hh:mm:ss GMT')
+
   # Magazine index — drives the dynamic article-list block.
   magazine:
     include:

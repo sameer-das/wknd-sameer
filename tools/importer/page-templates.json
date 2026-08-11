@@ -115,6 +115,59 @@
           ]
         }
       ]
+    },
+    {
+      "name": "adventures-landing",
+      "urls": [
+        "https://wknd.site/us/en/adventures.html"
+      ],
+      "coverageGaps": [],
+      "description": "Adventures listing page. Serif page title ('Adventures'), an intro hero teaser (full-bleed background photo with an overlaid heading 'Experience the world with us' and a short description), and a 'Current Adventures' section rendering a dynamic responsive grid of adventure cards (image, uppercase title link, short description) linking to each adventure detail page. The source filter tabs (All/Climbing/Cycling/Skiing/Surfing/Travel) are out of scope; the listing is modeled as a single flat grid of all 16 adventures. Header and footer are shared experience fragments.",
+      "blocks": [
+        {
+          "name": "hero",
+          "instances": [
+            "div.teaser.cmp-teaser--hero"
+          ]
+        },
+        {
+          "name": "adventure-list",
+          "instances": [
+            "div.cmp-tabs__tabpanel--active div.image-list.list"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "adventure-detail",
+      "urls": [
+        "https://wknd.site/us/en/adventures/bali-surf-camp.html",
+        "https://wknd.site/us/en/adventures/beervana-portland.html",
+        "https://wknd.site/us/en/adventures/climbing-new-zealand.html",
+        "https://wknd.site/us/en/adventures/colorado-rock-climbing.html",
+        "https://wknd.site/us/en/adventures/cycling-southern-utah.html",
+        "https://wknd.site/us/en/adventures/cycling-tuscany.html",
+        "https://wknd.site/us/en/adventures/downhill-skiing-wyoming.html",
+        "https://wknd.site/us/en/adventures/gastronomic-marais-tour.html",
+        "https://wknd.site/us/en/adventures/napa-wine-tasting.html",
+        "https://wknd.site/us/en/adventures/riverside-camping-australia.html",
+        "https://wknd.site/us/en/adventures/ski-touring-mont-blanc.html",
+        "https://wknd.site/us/en/adventures/surf-camp-costa-rica.html",
+        "https://wknd.site/us/en/adventures/tahoe-skiing.html",
+        "https://wknd.site/us/en/adventures/west-coast-cycling.html",
+        "https://wknd.site/us/en/adventures/whistler-mountain-biking.html",
+        "https://wknd.site/us/en/adventures/yosemite-backpacking.html"
+      ],
+      "coverageGaps": [],
+      "description": "Adventure detail page (16 adventures share this structure). Full-bleed lead image, H1 title with underline accent, a structured TRIP DETAILS key/value panel (Activity, Adventure Type, Trip Length, Group Size, Difficulty, Price), long-form Overview/Itinerary/What to Bring body content (source tabs flattened to headings, paragraphs, inline image and a bulleted list), a 'Share this Adventure' heading, and a row of social share/follow icon links. Header and footer are shared experience fragments.",
+      "blocks": [
+        {
+          "name": "adventure-details",
+          "instances": [
+            "div.contentfragment.cmp-contentfragment--elements"
+          ]
+        }
+      ]
     }
   ]
 }

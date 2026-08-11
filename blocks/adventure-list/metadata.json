@@ -1,0 +1,45 @@
+{
+  "variantName": "adventure-list",
+  "baseBlock": "cards",
+  "clonedFrom": "article-list",
+  "version": "1.0.0",
+  "created": "2026-08-11T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/adventures.html",
+    "originPage": "WKND Adventures landing page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "adventure",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title(link) + description",
+    "columnCount": 4,
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "dynamic": {
+    "plannedDataSource": "/adventures/query-index.json (helix-query.yaml)",
+    "note": "Structurally identical to article-list, but scoped to a SEPARATE adventures query index so adventures do not mix with magazine articles. Authored-row rendering is the static fallback / initial content contract."
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "adventure listing grids",
+      "curated experience card lists",
+      "query-index-driven adventure listings"
+    ],
+    "notSuitableFor": [
+      "magazine article grids (use article-list)",
+      "feature card grids with CTAs (use cards)",
+      "side-by-side comparisons (use columns)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/adventures"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-11T00:00:00.000Z"
+  }
+}
