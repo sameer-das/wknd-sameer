@@ -37,18 +37,24 @@ export default function transform(hookName, element, payload) {
       '#destination_publishing_iframe_wkndsite_0',
     ]);
 
-    // Adventures landing: the "Current Adventures" grid is an AEM tabs component
-    // with an active "All" panel (16 cards) plus 6 category-subset panels that
-    // DUPLICATE those cards, and a tablist of category buttons. The
+    // Adventures LANDING only: the "Current Adventures" grid is an AEM tabs
+    // component with an active "All" panel (16 cards) plus 6 category-subset
+    // panels that DUPLICATE those cards, and a tablist of category buttons. The
     // adventure-list block is mapped to the active panel; the inactive panels +
     // tablist would otherwise leak in as duplicate default content. Remove them
     // BEFORE parsing so only the active panel (consumed by the block) remains.
-    // Verified in adventures-landing/cleaned.html: 7 .cmp-tabs__tabpanel (1
-    // --active), 1 .cmp-tabs__tablist. No-op on templates without tabs.
-    element.querySelectorAll('.cmp-tabs__tabpanel:not(.cmp-tabs__tabpanel--active)').forEach((el) => el.remove());
-    WebImporter.DOMUtils.remove(element, [
-      '.cmp-tabs__tablist',
-    ]);
+    //
+    // IMPORTANT: adventure DETAIL pages ALSO use tabs (Overview / Itinerary /
+    // What to Bring), but those panels hold DISTINCT prose content that must be
+    // kept. So only strip inactive panels whose content is a card/image grid
+    // (the duplicate-listing case) — never prose panels. We detect the listing
+    // case by the presence of an image-list grid inside the tabs component.
+    element.querySelectorAll('.cmp-tabs').forEach((tabs) => {
+      const isListing = tabs.querySelector('.image-list, .cmp-image-list');
+      if (!isListing) return; // detail-page prose tabs: leave every panel intact
+      tabs.querySelectorAll('.cmp-tabs__tabpanel:not(.cmp-tabs__tabpanel--active)').forEach((el) => el.remove());
+      tabs.querySelectorAll('.cmp-tabs__tablist').forEach((el) => el.remove());
+    });
   }
 
   if (hookName === TransformHook.afterTransform) {
@@ -154,6 +160,35 @@ export default function transform(hookName, element, payload) {
     //    label from the image filename (e.g. "surfer-back-from-the-ocean.jpeg"
     //    -> "Surfer back from the ocean") so every content image conveys
     //    meaning for screen readers and passes accessibility audits.
+    //
+    //    Some source filenames are uninformative (e.g. "mx121", "blast",
+    //    "sequoiaside", "surfing-5", "equipment-4", or a stock/photographer
+    //    credit like "adam-wilson-unsplash"). For those we fall back to the
+    //    page's title (H1) so the alt describes the page context instead of a
+    //    meaningless slug. The page title is resolved once per document.
+    const pageTitle = (() => {
+      const h1 = element.querySelector('h1');
+      if (h1 && h1.textContent.trim()) return h1.textContent.trim();
+      const t = (element.ownerDocument && element.ownerDocument.title) || '';
+      return t.replace(/\s*[|\-–]\s*WKND.*$/i, '').trim();
+    })();
+
+    // Heuristic: a filename-derived label is "uninformative" when, after
+    // stripping trailing counters, it is a single short/opaque token (no real
+    // words) or a known stock-photo credit pattern.
+    const isUninformative = (label) => {
+      if (!label) return true;
+      const credit = /(unsplash|pexels|shutterstock|getty|istock|adobe ?stock)/i;
+      if (credit.test(label)) return true;
+      const words = label.replace(/\b\d+\b/g, '').trim().split(/\s+/).filter(Boolean);
+      // A single-word filename-derived label ("blast", "sequoiaside", "mx",
+      // "mx121", "surfing") is almost never a real image description — genuine
+      // source alts are multi-word sentences. Treat any 0- or 1-word label as
+      // uninformative so it falls back to the page title/context.
+      if (words.length <= 1) return true;
+      return false;
+    };
+
     element.querySelectorAll('img').forEach((img) => {
       const alt = img.getAttribute('alt');
       if (alt && alt.trim()) return; // already has meaningful alt
@@ -166,10 +201,17 @@ export default function transform(hookName, element, payload) {
         .replace(/\b\d{6,}\b/g, '') // drop long numeric IDs
         .replace(/\s+/g, ' ')
         .trim();
-      if (base) {
+
+      if (base && !isUninformative(base)) {
+        img.setAttribute('alt', base.charAt(0).toUpperCase() + base.slice(1));
+      } else if (pageTitle) {
+        // Uninformative filename -> describe by page context.
+        img.setAttribute('alt', pageTitle);
+      } else if (base) {
+        // Last resort: use the cleaned filename even if weak.
         img.setAttribute('alt', base.charAt(0).toUpperCase() + base.slice(1));
       } else {
-        // Purely decorative (no usable filename): mark explicitly decorative.
+        // Purely decorative (no usable filename, no title): mark decorative.
         img.setAttribute('alt', '');
         img.setAttribute('role', 'presentation');
       }
