@@ -1,20 +1,157 @@
 footer {
-  background-color: var(--light-color);
+  background-color: var(--footer-bg-color);
+  color: var(--footer-text-color);
+  font-family: var(--body-font-family);
   font-size: var(--body-font-size-xs);
 }
 
 footer .footer > div {
   margin: auto;
   max-width: 1200px;
-  padding: 40px 24px 24px;
+  padding: 32px 24px 24px;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+/* links inside the footer are light on the dark background */
+footer .footer a:any-link {
+  color: var(--footer-text-color);
+  text-decoration: none;
+}
+
+footer .footer a:hover {
+  color: var(--brand-color);
+  text-decoration: none;
+}
+
+/* logo */
+footer .footer .icon-wknd-logo-light {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  height: 48px;
+}
+
+footer .footer .icon-wknd-logo-light img,
+footer .footer .icon-wknd-logo-light svg {
+  width: auto;
+  height: 48px;
+  max-width: none;
+}
+
+/* nav links */
+footer .footer nav ul,
+footer .footer .default-content-wrapper ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+footer .footer .default-content-wrapper ul a:any-link {
+  display: inline-block;
+  padding: 6px 0;
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* "Follow Us" heading */
+footer .footer h4 {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--footer-text-color);
+}
+
+/* social icons — keep the block's own shape, make it legible on dark */
+footer .footer .social-links {
+  color: var(--footer-text-color);
+}
+
+footer .footer .social-links .social-links-link:hover,
+footer .footer .social-links .social-links-link:focus {
+  background-color: var(--brand-color);
+  border-color: var(--brand-color);
+  color: var(--text-color);
+}
+
+/* copyright + description */
+footer .footer .default-content-wrapper:not(:has(ul)) {
+  margin-top: 24px;
+}
+
+footer .footer .default-content-wrapper:not(:has(ul)) p {
+  color: #f7f7f7;
+  font-size: 12px;
+  line-height: 1.35;
+  margin-bottom: 12px;
+}
+
+footer .footer .default-content-wrapper:not(:has(ul)) p:last-child {
+  margin-bottom: 0;
+}
+
+/* top group (logo + nav + follow us) stacks on mobile */
+footer .footer .default-content-wrapper:has(ul) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+footer .footer .social-links-wrapper {
+  margin-top: 16px;
+}
+
 @media (width >= 900px) {
   footer .footer > div {
     padding: 40px 32px 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px 40px;
+  }
+
+  footer .footer .section {
+    display: contents;
+  }
+
+  /* top group: logo | nav ....... follow us */
+  footer .footer .default-content-wrapper:has(ul) {
+    flex: 1 1 auto;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+  }
+
+  footer .footer .default-content-wrapper:has(ul) ul {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  footer .footer .default-content-wrapper:has(ul) h4 {
+    margin-left: auto;
+  }
+
+  /* social icons pinned to the far right, same row */
+  footer .footer .social-links-wrapper {
+    flex: 0 0 auto;
+    margin-top: 0;
+  }
+
+  /* copyright + description drop to a full-width row below */
+  footer .footer .default-content-wrapper:not(:has(ul)) {
+    flex: 0 0 100%;
+    margin-top: 8px;
   }
 }

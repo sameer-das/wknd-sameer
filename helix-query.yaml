@@ -1,0 +1,71 @@
+version: 1
+
+indices:
+  # Full-site index — powers the sitemap (all published pages).
+  default:
+    include:
+      - '/**'
+    exclude:
+      - '/drafts/**'
+      - '/tools/**'
+      - '/nav'
+      - '/footer'
+    target: /query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: |
+          attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: |
+          attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: |
+          match(attribute(el, 'content'), 'https:\/\/[^"]*')
+      lastModified:
+        select: none
+        value: |
+          parseTimestamp(headers('last-modified'), 'ddd, DD MMM YYYY hh:mm:ss GMT')
+      robots:
+        select: head > meta[name="robots"]
+        value: |
+          attribute(el, 'content')
+
+  # Magazine index — drives the dynamic article-list block.
+  magazine:
+    include:
+      - '/magazine/**'
+    exclude:
+      - '/magazine'
+    target: /magazine/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: |
+          attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: |
+          attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: |
+          match(attribute(el, 'content'), 'https:\/\/[^"]*')
+      author:
+        select: head > meta[name="author"]
+        value: |
+          attribute(el, 'content')
+      author-title:
+        select: head > meta[name="author-title"]
+        value: |
+          attribute(el, 'content')
+      publication-date:
+        select: head > meta[name="publication-date"]
+        value: |
+          attribute(el, 'content')
+      lastModified:
+        select: none
+        value: |
+          parseTimestamp(headers('last-modified'), 'ddd, DD MMM YYYY hh:mm:ss GMT')

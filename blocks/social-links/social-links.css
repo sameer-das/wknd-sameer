@@ -1,0 +1,76 @@
+.social-links .social-links-list {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.social-links .social-links-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #dadada;
+  border-radius: 50%;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-links .social-links-link:hover,
+.social-links .social-links-link:focus {
+  background-color: var(--text-color, #131313);
+  border-color: var(--text-color, #131313);
+  color: var(--background-color, #fff);
+}
+
+.social-links .social-links-icon {
+  width: 18px;
+  height: 18px;
+  background-color: currentcolor;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}
+
+/* Icon glyphs via CSS masks (data URIs keep the block self-contained). */
+.social-links .social-links-icon-facebook {
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3h-3.1V8.1c0-.9.3-1.5 1.5-1.5H17V3.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.8v8h2.7z"/></svg>');
+}
+
+.social-links .social-links-icon-twitter,
+.social-links .social-links-icon-x {
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.9 3H22l-7 8 8.2 10h-6.4l-5-6.1L6 21H3l7.5-8.6L2.6 3H9l4.5 5.6L18.9 3zm-1.1 16h1.7L8.3 4.8H6.5L17.8 19z"/></svg>');
+}
+
+.social-links .social-links-icon-instagram {
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7.4a4.6 4.6 0 100 9.2 4.6 4.6 0 000-9.2zm0 7.6a3 3 0 110-6 3 3 0 010 6zm4.8-7.8a1.1 1.1 0 11-2.2 0 1.1 1.1 0 012.2 0zM20 7.6c-.1-1.4-.4-2.6-1.4-3.6S16.4 2.7 15 2.6C13.6 2.5 9.4 2.5 8 2.6c-1.4.1-2.6.4-3.6 1.4S2.7 6.6 2.6 8c-.1 1.4-.1 5.6 0 7 .1 1.4.4 2.6 1.4 3.6s2.2 1.3 3.6 1.4c1.4.1 5.6.1 7 0 1.4-.1 2.6-.4 3.6-1.4s1.3-2.2 1.4-3.6c.1-1.4.1-5.6 0-7zM18 16.4c-.3.7-.9 1.3-1.6 1.6-1.1.4-3.8.3-5 .3s-3.9.1-5-.3c-.7-.3-1.3-.9-1.6-1.6-.4-1.1-.3-3.8-.3-5s-.1-3.9.3-5C5.1 5.7 5.7 5.1 6.4 4.8c1.1-.4 3.8-.3 5-.3s3.9-.1 5 .3c.7.3 1.3.9 1.6 1.6.4 1.1.3 3.8.3 5s.1 3.9-.3 5z"/></svg>');
+}
+
+/* Icon links hide their text label (kept for screen readers). */
+.social-links .social-links-has-icon .social-links-text {
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
+/* Unknown/label-only platforms: show the text label instead of an icon. */
+.social-links .social-links-generic {
+  width: auto;
+  height: auto;
+  border-radius: 20px;
+  padding: 8px 14px;
+  gap: 8px;
+}
+
+.social-links .social-links-generic .social-links-icon {
+  display: none;
+}
+
+.social-links .social-links-generic .social-links-text {
+  font-size: var(--body-font-size-s, 0.875rem);
+}

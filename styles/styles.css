@@ -11,62 +11,63 @@
  */
 
 :root {
-  /* colors */
-  --background-color: white;
-  --light-color: #f8f8f8;
-  --dark-color: #505050;
-  --text-color: #131313;
-  --link-color: #3b63fb;
-  --link-hover-color: #1d3ecf;
+  /* colors — WKND palette */
+  --background-color: #fff;
+  --light-color: #ebebeb;
+  --dark-color: #202020;
+  --text-color: #202020;
+  --link-color: #202020;
+  --link-hover-color: #7a7a7a;
+
+  /* WKND brand */
+  --brand-color: #ffea00; /* WKND yellow — CTAs */
+  --brand-hover-color: #d6c400;
+  --footer-bg-color: #202020;
+  --footer-text-color: #ebebeb;
 
   /* fonts */
-  --body-font-family: roboto, roboto-fallback, sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: 'Source Sans Pro', source-sans-fallback, 'Helvetica Neue', helvetica, arial, sans-serif;
+  --heading-font-family: asar, asar-fallback, georgia, 'Times New Roman', times, serif;
 
   /* body sizes */
-  --body-font-size-m: 22px;
-  --body-font-size-s: 19px;
-  --body-font-size-xs: 17px;
+  --body-font-size-m: 18px;
+  --body-font-size-s: 16px;
+  --body-font-size-xs: 14px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
-  --heading-font-size-xl: 44px;
-  --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
-  --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
+  --heading-font-size-xxl: 48px;
+  --heading-font-size-xl: 40px;
+  --heading-font-size-l: 32px;
+  --heading-font-size-m: 26px;
+  --heading-font-size-s: 22px;
+  --heading-font-size-xs: 18px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 88px;
 }
 
-/* fallback fonts */
+/* fallback fonts — size-adjusted to minimize CLS before webfonts load */
 @font-face {
-  font-family: roboto-condensed-fallback;
-  size-adjust: 88.82%;
+  font-family: source-sans-fallback;
+  size-adjust: 100%;
   src: local('Arial');
 }
 
 @font-face {
-  font-family: roboto-fallback;
-  size-adjust: 99.529%;
-  src: local('Arial');
+  font-family: asar-fallback;
+  size-adjust: 105%;
+  src: local('Georgia');
 }
 
 @media (width >= 900px) {
   :root {
-    /* body sizes */
-    --body-font-size-m: 18px;
-    --body-font-size-s: 16px;
-    --body-font-size-xs: 14px;
-
     /* heading sizes */
-    --heading-font-size-xxl: 45px;
-    --heading-font-size-xl: 36px;
-    --heading-font-size-l: 28px;
-    --heading-font-size-m: 22px;
-    --heading-font-size-s: 20px;
-    --heading-font-size-xs: 18px;
+    --heading-font-size-xxl: 56px;
+    --heading-font-size-xl: 44px;
+    --heading-font-size-l: 36px;
+    --heading-font-size-m: 28px;
+    --heading-font-size-s: 24px;
+    --heading-font-size-xs: 20px;
   }
 }
 
@@ -107,7 +108,7 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: 400; /* Asar is a single-weight serif */
   line-height: 1.25;
   scroll-margin: 40px;
 }
@@ -179,11 +180,13 @@ button.button {
   max-width: 100%;
   margin: 0;
   border: 2px solid transparent;
-  border-radius: 2.4em;
-  padding: 0.5em 1.2em;
+  border-radius: 0; /* WKND CTAs are rectangular */
+  padding: 14px 35px;
   font: inherit;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   text-decoration: none;
   cursor: pointer;
   overflow: hidden;
@@ -199,18 +202,18 @@ button.button:disabled {
 
 a.button.primary,
 button.button.primary {
-  border-color: var(--text-color);
-  background-color: var(--text-color);
-  color: var(--background-color);
+  border-color: var(--brand-color);
+  background-color: var(--brand-color);
+  color: var(--text-color);
 }
 
 a.button.primary:hover,
 a.button.primary:focus-visible,
 button.button.primary:hover,
 button.button.primary:focus-visible {
-  border-color: var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--light-color);
+  border-color: var(--brand-hover-color);
+  background-color: var(--brand-hover-color);
+  color: var(--text-color);
 }
 
 a.button.primary[aria-disabled="true"],
@@ -254,17 +257,17 @@ button.button.secondary:disabled:focus-visible {
 /* high-impact call-to-action */
 a.button.accent,
 button.button.accent {
-  border-color: var(--link-color);
-  background-color: var(--link-color);
-  color: var(--background-color);
+  border-color: var(--brand-color);
+  background-color: var(--brand-color);
+  color: var(--text-color);
 }
 
 a.button.accent:hover,
 a.button.accent:focus-visible,
 button.button.accent:hover,
 button.button.accent:focus-visible {
-  border-color: var(--link-hover-color);
-  background-color: var(--link-hover-color);
+  border-color: var(--brand-hover-color);
+  background-color: var(--brand-hover-color);
 }
 
 a.button.accent[aria-disabled="true"],

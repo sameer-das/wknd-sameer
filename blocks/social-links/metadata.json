@@ -1,0 +1,38 @@
+{
+  "variantName": "social-links",
+  "baseBlock": null,
+  "version": "1.0.0",
+  "created": "2026-08-10T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/magazine/arctic-surfing.html",
+    "originPage": "WKND magazine article page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "social-share-follow",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "list of labeled links (platform name + URL) rendered as icon buttons",
+    "buttonCount": 3,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "article author/publication social links",
+      "footer 'Follow Us' icon rows",
+      "any accessible social share/follow icon list"
+    ],
+    "notSuitableFor": [
+      "primary CTA buttons (use default content links)",
+      "embedded social posts (use embed)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en/magazine/arctic-surfing"],
+    "reuseCount": 1,
+    "lastUsed": "2026-08-10T00:00:00.000Z"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "da",
+  "sites": {
+    "wknd-sameer": {
+      "previewOrg": "sameer-das",
+      "previewSite": "wknd-sameer",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

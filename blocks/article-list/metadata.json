@@ -1,0 +1,43 @@
+{
+  "variantName": "article-list",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-08-10T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en.html",
+    "originPage": "WKND home page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "article",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + title(link) + description",
+    "columnCount": 4,
+    "buttonCount": 0,
+    "imageCount": 1
+  },
+  "dynamic": {
+    "plannedDataSource": "query-index (helix-query.yaml)",
+    "note": "Structurally identical to cards today; will later be driven dynamically from a query index of magazine articles. Authored-row rendering is the static fallback / initial content contract."
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "recent/all articles grids",
+      "magazine article card lists",
+      "query-index-driven article listings"
+    ],
+    "notSuitableFor": [
+      "feature card grids with CTAs (use cards)",
+      "side-by-side comparisons (use columns)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/us/en", "/us/en/magazine"],
+    "reuseCount": 2,
+    "lastUsed": "2026-08-10T00:00:00.000Z"
+  }
+}
