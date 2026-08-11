@@ -124,14 +124,37 @@ export default async function decorate(block) {
   nav.id = 'nav';
   while (fragment.firstElementChild) nav.append(fragment.firstElementChild);
 
-  const classes = ['brand', 'sections', 'tools'];
-  classes.forEach((c, i) => {
+  // Assign roles by CONTENT rather than by position, so a change in how the
+  // nav is authored (e.g. logo omitted) can't misalign the classes and drop the
+  // menu into the wrong wrapper. Heuristics:
+  //   - sections (the menu): the section whose list has the most links
+  //   - brand: a section containing the logo image/icon (and no menu list)
+  //   - tools: a section with the search widget / no list and no logo
+  const sectionEls = [...nav.children];
+  const linkCount = (el) => el.querySelectorAll(':scope ul a').length;
+  const menuSection = sectionEls
+    .filter((el) => linkCount(el) > 0)
+    .sort((a, b) => linkCount(b) - linkCount(a))[0];
+
+  sectionEls.forEach((section) => {
+    if (section === menuSection) {
+      section.classList.add('nav-sections');
+    } else if (section.querySelector('img, .icon-wknd-logo, [class*="logo"]')) {
+      section.classList.add('nav-brand');
+    } else {
+      section.classList.add('nav-tools');
+    }
+  });
+
+  // Fallback: if the content-based pass left any section unclassified (e.g. an
+  // unexpected layout), fill the standard slots positionally.
+  ['brand', 'sections', 'tools'].forEach((c, i) => {
     const section = nav.children[i];
-    if (section) section.classList.add(`nav-${c}`);
+    if (section && !section.className.includes('nav-')) section.classList.add(`nav-${c}`);
   });
 
   const navBrand = nav.querySelector('.nav-brand');
-  const brandLink = navBrand.querySelector('.button');
+  const brandLink = navBrand && navBrand.querySelector('.button');
   if (brandLink) {
     brandLink.className = '';
     brandLink.closest('.button-container').className = '';

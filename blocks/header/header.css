@@ -170,7 +170,7 @@ header nav .nav-brand .icon-wknd-logo svg {
   max-width: none;
 }
 
-/* sections */
+/* sections — the primary navigation menu */
 header nav .nav-sections {
   grid-area: sections;
   flex: 1 1 auto;
@@ -184,10 +184,22 @@ header nav[aria-expanded='true'] .nav-sections {
   align-self: start;
 }
 
+/* Render the section's list as a menu (no bullets/markers) regardless of which
+   wrapper it lands in, so a change in nav content order can't revert it to a
+   plain bulleted list. */
 header nav .nav-sections ul {
   list-style: none;
+  margin: 0;
   padding-left: 0;
   font-size: var(--body-font-size-xs);
+}
+
+header nav .nav-sections li {
+  list-style: none;
+}
+
+header nav .nav-sections li::marker {
+  content: '';
 }
 
 /* nav links inherit #202020 via `header nav a:any-link { color: currentcolor }` */
@@ -195,19 +207,38 @@ header nav .nav-sections a {
   text-transform: uppercase;
   font-weight: 400;
   letter-spacing: 0.02em;
+  text-decoration: none;
 }
 
-header nav .nav-sections ul > li > ul {
-  margin-top: 0;
+/* mobile: vertical stacked menu with row dividers. Rules are ordered by
+   ascending specificity to satisfy stylelint no-descending-specificity —
+   plain element/class selectors first, :hover/:focus variants last. */
+header nav .nav-sections ul > li {
+  border-bottom: 1px solid var(--light-color);
 }
 
-/* mobile: vertical stacked links */
 header nav .nav-sections ul > li > a {
   display: block;
-  padding: 12px 0;
+  padding: 14px 0;
 }
 
-header nav .nav-sections ul > li > a:hover {
+/* submenu (dropdown) list: reset spacing + indent under its parent on mobile */
+header nav .nav-sections ul > li > ul {
+  margin-top: 0;
+  padding-left: 16px;
+}
+
+header nav .nav-sections ul > li > ul > li {
+  border-bottom: 0;
+}
+
+header nav .nav-sections ul > li > ul > li > a {
+  padding: 8px 0;
+  font-weight: 300;
+}
+
+header nav .nav-sections ul > li > a:hover,
+header nav .nav-sections ul > li > a:focus-visible {
   color: var(--brand-hover-color);
   text-decoration: none;
 }
@@ -223,59 +254,92 @@ header nav .nav-sections ul > li > a:hover {
     align-self: unset;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul {
+  /* horizontal menu bar */
+  header nav .nav-sections ul {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 8px;
-    margin: 0;
+    gap: 4px;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li {
+  header nav .nav-sections ul > li {
     flex: 0 1 auto;
     position: relative;
+    border-bottom: 0;
   }
 
+  /* dropdown affordance for items with a submenu (header.js adds .nav-drop) */
   header nav .nav-sections .nav-drop {
-    position: relative;
-    padding-right: 16px;
     cursor: pointer;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
-    display: none;
-    position: relative;
+  header nav .nav-sections .nav-drop > a::after {
+    content: '';
+    display: inline-block;
+    margin-left: 6px;
+    border: 4px solid transparent;
+    border-top-color: currentcolor;
+    transform: translateY(2px);
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
+  /* Rules ordered by ascending specificity (no-descending-specificity):
+     plain top-level link, then submenu panel + plain submenu link, then all the
+     :hover / :focus / [aria-*] state variants last. */
+
+  /* top-level menu items: comfortable click target */
+  header nav .nav-sections ul > li > a {
     display: block;
+    padding: 15px 17px;
+    line-height: 21px;
+    border-radius: 2px;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  /* submenu panel */
+  header nav .nav-sections ul > li > ul {
+    display: none;
     position: absolute;
     left: 0;
-    width: 200px;
     top: 100%;
+    min-width: 200px;
+    margin: 0;
     padding: 8px 0;
     background-color: var(--background-color);
     box-shadow: 0 8px 16px rgb(0 0 0 / 12%);
     white-space: initial;
+    z-index: 3;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > a {
-    display: block;
-    padding: 15px 17px;
-    line-height: 21px;
-    transition: background-color 0.15s ease;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li > a {
+  header nav .nav-sections ul > li > ul > li > a {
     display: block;
     padding: 8px 17px;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li > a:hover,
-  header nav .nav-sections .default-content-wrapper > ul > li > a:focus {
+  /* --- state variants (hover / focus / expanded / current) --- */
+  header nav .nav-sections ul > li > a:hover,
+  header nav .nav-sections ul > li > a:focus-visible {
     background-color: var(--brand-color);
     color: var(--text-color);
     text-decoration: none;
+  }
+
+  /* active/current page item gets a persistent brand underline */
+  header nav .nav-sections ul > li > a[aria-current='page'],
+  header nav .nav-sections ul > li[aria-current='page'] > a {
+    box-shadow: inset 0 -3px 0 0 var(--brand-color);
+  }
+
+  /* submenu opens on hover/focus/expanded */
+  header nav .nav-sections ul > li:hover > ul,
+  header nav .nav-sections ul > li:focus-within > ul,
+  header nav .nav-sections ul > li[aria-expanded='true'] > ul {
+    display: block;
+  }
+
+  header nav .nav-sections ul > li > ul > li > a:hover,
+  header nav .nav-sections ul > li > ul > li > a:focus-visible {
+    background-color: var(--brand-color);
+    color: var(--text-color);
   }
 }
 
