@@ -2,5 +2,6 @@ version: 1
 
 sitemaps:
   default:
+    origin: https://main--wknd-sameer--sameer-das.aem.live
     source: /query-index.json
     destination: /sitemap.xml
