@@ -5,6 +5,49 @@
  * uppercase bold titles.
  */
 
+/* category filter tabs (ALL / CLIMBING / CYCLING / SKIING / SURFING / TRAVEL) */
+.adventure-list .adventure-list-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 0 0 28px;
+  border-bottom: 1px solid var(--light-color);
+  padding-bottom: 16px;
+}
+
+.adventure-list .adventure-list-tab {
+  margin: 0;
+  border: 0;
+  border-radius: 2px;
+  padding: 6px 14px;
+  background: transparent;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.adventure-list .adventure-list-tab:hover {
+  color: var(--brand-hover-color);
+}
+
+/* active tab: dark filled pill (matches the WKND "ALL" treatment) */
+.adventure-list .adventure-list-tab[aria-selected='true'] {
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+.adventure-list .adventure-list-tab:focus-visible {
+  outline: 2px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
 .adventure-list > ul {
   list-style: none;
   margin: 0;
@@ -12,6 +55,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
   gap: 32px 24px;
+}
+
+/* hidden cards (filtered out) — [hidden] alone is overridden by display:grid item */
+.adventure-list > ul > li[hidden] {
+  display: none;
 }
 
 .adventure-list > ul > li {

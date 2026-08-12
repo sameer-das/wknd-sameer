@@ -147,6 +147,10 @@ export default async function decorate(block) {
     : DEFAULT_INDEX;
   const limit = config.limit ? parseInt(config.limit, 10) : 0;
 
+  // Category tabs are shown by default in dynamic mode; an author can disable
+  // them with a `tabs: false` config line.
+  const showTabs = config.tabs !== 'false' && config.tabs !== 'off';
+
   try {
     const resp = await fetch(source);
     if (!resp.ok) throw new Error(`query index ${resp.status}`);
@@ -156,8 +160,65 @@ export default async function decorate(block) {
     if (limit > 0) adventures = adventures.slice(0, limit);
 
     const ul = document.createElement('ul');
-    adventures.forEach((adventure) => ul.append(buildCard(adventure)));
-    block.replaceChildren(ul);
+    adventures.forEach((adventure) => {
+      const card = buildCard(adventure);
+      const cat = (adventure.category || '').trim();
+      if (cat) card.dataset.category = cat;
+      ul.append(card);
+    });
+
+    // Build the category filter tabs from the categories present in the feed.
+    const categories = [...new Set(
+      adventures.map((a) => (a.category || '').trim()).filter(Boolean),
+    )].sort();
+
+    if (showTabs && categories.length > 1) {
+      const tablist = document.createElement('div');
+      tablist.className = 'adventure-list-tabs';
+      tablist.setAttribute('role', 'tablist');
+      tablist.setAttribute('aria-label', 'Filter adventures by category');
+
+      const filterTo = (cat, tabEls) => {
+        [...ul.children].forEach((li) => {
+          const show = cat === 'All' || li.dataset.category === cat;
+          li.hidden = !show;
+        });
+        tabEls.forEach((t) => {
+          const active = t.dataset.category === cat;
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+          t.tabIndex = active ? 0 : -1;
+        });
+      };
+
+      const labels = ['All', ...categories];
+      const tabEls = labels.map((label) => {
+        const tab = document.createElement('button');
+        tab.type = 'button';
+        tab.className = 'adventure-list-tab';
+        tab.textContent = label;
+        tab.dataset.category = label;
+        tab.setAttribute('role', 'tab');
+        tab.addEventListener('click', () => filterTo(label, tabEls));
+        tablist.append(tab);
+        return tab;
+      });
+
+      // Keyboard navigation between tabs (left/right arrows).
+      tablist.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+        const idx = tabEls.indexOf(document.activeElement);
+        if (idx === -1) return;
+        const next = e.key === 'ArrowRight'
+          ? (idx + 1) % tabEls.length
+          : (idx - 1 + tabEls.length) % tabEls.length;
+        tabEls[next].focus();
+      });
+
+      filterTo('All', tabEls); // "All" selected by default
+      block.replaceChildren(tablist, ul);
+    } else {
+      block.replaceChildren(ul);
+    }
   } catch (e) {
     // Fallback: if a fetch fails but authored rows exist, render them.
     // eslint-disable-next-line no-console

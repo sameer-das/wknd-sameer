@@ -53,6 +53,10 @@ indices:
         select: head > meta[property="og:image"]
         value: |
           match(attribute(el, 'content'), 'https:\/\/[^"]*')
+      category:
+        select: head > meta[name="category"]
+        value: |
+          attribute(el, 'content')
       lastModified:
         select: none
         value: |
