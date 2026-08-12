@@ -120,6 +120,31 @@ export default {
 
     executeTransformers('afterTransform', main, payload);
 
+    // The source has two separate "Members Only" secure teasers, so the parser
+    // produced two single-card `cards-members` blocks. Merge them into ONE block
+    // so the block's responsive grid can lay them out multi-up (2 columns
+    // >=900px, 1 column below).
+    //
+    // At this point (before the framework serialises to markdown) each block is
+    // a <table> whose first cell reads "cards-members". Move the card rows from
+    // the later tables into the first, then drop the empties. The card rows are
+    // every <tr> except the header row.
+    // Block tables carry a title-cased name cell ("Cards Members").
+    const memberTables = [...main.querySelectorAll('table')].filter((tbl) => {
+      const first = tbl.querySelector('tr td, tr th');
+      return first && /cards[\s-]*members/i.test(first.textContent.trim());
+    });
+    if (memberTables.length > 1) {
+      const [firstTable, ...restTables] = memberTables;
+      const firstBody = firstTable.querySelector('tbody') || firstTable;
+      restTables.forEach((tbl) => {
+        const rows = [...tbl.querySelectorAll('tr')];
+        // skip the header row (the one containing the "cards-members" label)
+        rows.slice(1).forEach((tr) => firstBody.append(tr));
+        tbl.remove();
+      });
+    }
+
     const hr = document.createElement('hr');
     main.appendChild(hr);
     WebImporter.rules.createMetadata(main, document);
