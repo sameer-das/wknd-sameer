@@ -79,3 +79,62 @@ body.article-page main h5 {
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
+
+/* ---------------------------------------------------------------------------
+   FAQs page (body.faqs)
+   Two-column layout: the main content (image + intro + accordion) sits in a
+   wide left column, and the "Need more help?" section in a narrower right
+   column. Stacks to a single column on smaller screens.
+   --------------------------------------------------------------------------- */
+
+@media (width >= 900px) {
+  body.faqs main {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    column-gap: 48px;
+    align-items: start;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 32px;
+  }
+
+  /* First section (FAQs title + image + intro + accordion) = left column */
+  body.faqs main > .section:first-of-type {
+    grid-column: 1;
+  }
+
+  /* Second section ("Need more help?") = right column, top-aligned */
+  body.faqs main > .section:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  /* Any trailing section (e.g. metadata-only) shouldn't disturb the grid */
+  body.faqs main > .section:nth-of-type(n + 3) {
+    grid-column: 1 / -1;
+  }
+
+  /* Sections inside the grid don't need their own max-width/padding */
+  body.faqs main > .section > div {
+    max-width: none;
+    padding-inline: 0;
+  }
+}
+
+/* "Need more help?" heading — serif, matches the FAQs title weight.
+   stylelint's no-descending-specificity flags this against the article-page h2
+   rule above, but the two are on mutually-exclusive templates (body.faqs vs
+   body.article-page) so there is no real cascade conflict. */
+/* stylelint-disable-next-line no-descending-specificity */
+body.faqs main .section h2 {
+  margin-top: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+}
+
+body.faqs main .section:nth-of-type(2) p {
+  font-size: var(--body-font-size-s);
+  line-height: 1.7;
+  color: var(--text-color);
+}
+
