@@ -19,6 +19,37 @@ const transformers = [
   sectionsTransformer,
 ];
 
+// Primary category per adventure (drives the adventures-landing filter tabs).
+// Derived from the source's "Current Adventures" tab membership; adventures that
+// only appear under "All" are mapped by their primary activity.
+const ADVENTURE_CATEGORIES = {
+  'climbing-new-zealand': 'Climbing',
+  'colorado-rock-climbing': 'Climbing',
+  'whistler-mountain-biking': 'Cycling',
+  'cycling-tuscany': 'Cycling',
+  'west-coast-cycling': 'Cycling',
+  'cycling-southern-utah': 'Cycling',
+  'downhill-skiing-wyoming': 'Skiing',
+  'ski-touring-mont-blanc': 'Skiing',
+  'tahoe-skiing': 'Skiing',
+  'bali-surf-camp': 'Surfing',
+  'surf-camp-costa-rica': 'Surfing',
+  'beervana-portland': 'Travel',
+  'gastronomic-marais-tour': 'Travel',
+  'napa-wine-tasting': 'Travel',
+  'riverside-camping-australia': 'Travel',
+  'yosemite-backpacking': 'Travel',
+};
+
+function categoryForUrl(originalURL) {
+  try {
+    const m = new URL(originalURL).pathname.match(/\/adventures\/([a-z0-9-]+)(?:\.html?)?$/i);
+    return m ? ADVENTURE_CATEGORIES[m[1]] : null;
+  } catch (e) {
+    return null;
+  }
+}
+
 // PAGE TEMPLATE CONFIGURATION (embedded from page-templates.json)
 const PAGE_TEMPLATE = {
   name: 'adventure-detail',
@@ -138,27 +169,38 @@ export default {
     main.appendChild(hr);
     WebImporter.rules.createMetadata(main, document);
 
+    // Locate the Metadata block appended by createMetadata for augmentation.
+    const metaTable = [...main.querySelectorAll('table')].find((t) => {
+      const first = t.querySelector('th, td');
+      return first && first.textContent.trim().toLowerCase() === 'metadata';
+    });
+    const addMetaRow = (key, valueNode) => {
+      if (!metaTable) return;
+      const tbody = metaTable.querySelector('tbody') || metaTable;
+      const tr = document.createElement('tr');
+      const k = document.createElement('td');
+      k.textContent = key;
+      const v = document.createElement('td');
+      if (typeof valueNode === 'string') v.textContent = valueNode;
+      else v.append(valueNode);
+      tr.append(k, v);
+      tbody.append(tr);
+    };
+
     // Add a representative Image to the Metadata block (og:image) if the page
     // has a lead image and createMetadata didn't already capture one.
-    if (heroImg && heroImg.src) {
-      const tables = [...main.querySelectorAll('table')];
-      const metaTable = tables.find((t) => {
-        const first = t.querySelector('th, td');
-        return first && first.textContent.trim().toLowerCase() === 'metadata';
-      });
-      if (metaTable && !/>\s*image\s*</i.test(metaTable.innerHTML)) {
-        const tbody = metaTable.querySelector('tbody') || metaTable;
-        const tr = document.createElement('tr');
-        const k = document.createElement('td');
-        k.textContent = 'Image';
-        const v = document.createElement('td');
-        const img = document.createElement('img');
-        img.src = heroImg.src;
-        img.alt = heroImg.alt || document.title;
-        v.append(img);
-        tr.append(k, v);
-        tbody.append(tr);
-      }
+    if (heroImg && heroImg.src && metaTable && !/>\s*image\s*</i.test(metaTable.innerHTML)) {
+      const img = document.createElement('img');
+      img.src = heroImg.src;
+      img.alt = heroImg.alt || document.title;
+      addMetaRow('Image', img);
+    }
+
+    // Add the adventure's Category so it lands in the query index and drives the
+    // adventures-landing filter tabs.
+    const category = categoryForUrl(params.originalURL);
+    if (category && metaTable && !/>\s*category\s*</i.test(metaTable.innerHTML)) {
+      addMetaRow('Category', category);
     }
 
     WebImporter.rules.transformBackgroundImages(main, document);
