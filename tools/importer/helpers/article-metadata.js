@@ -98,6 +98,10 @@ export default function augmentArticleMetadata(main, document, originalURL, hero
     tbody.append(tr);
   };
 
+  // Template drives a body class (via decorateTemplateAndTheme) so the whole
+  // article page type can be styled with `body.article-page` scoped CSS.
+  if (!/>\s*template\s*</i.test(table.innerHTML)) addRow('Template', 'article-page');
+
   addRow('Author', data.author);
   if (data.authorTitle) addRow('Author Title', data.authorTitle);
   addRow('Publication Date', data.date);
