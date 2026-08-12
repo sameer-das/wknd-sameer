@@ -1,0 +1,23 @@
+{
+  "variantName": "carousel",
+  "baseBlock": null,
+  "version": "1.0.0",
+  "created": "2026-08-12T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd.site/us/en/adventures/bali-surf-camp.html",
+    "originPage": "WKND adventure detail pages",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "image-gallery-carousel",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "one image per row; rendered as a scroll-snap slide track with clickable prev/next arrows and indicator dots",
+    "rowCount": 3,
+    "buttonCount": 0,
+    "imageCount": 3
+  }
+}
