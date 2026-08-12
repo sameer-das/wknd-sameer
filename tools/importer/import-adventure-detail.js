@@ -165,6 +165,35 @@ export default {
 
     executeTransformers('afterTransform', main, payload);
 
+    // Collect the article-body images into a single image CAROUSEL block placed
+    // at the top of the content, so all photos display as a clickable gallery
+    // (prev/next + dots) instead of scattered inline. The adventure-details
+    // panel is already a block <table> by this point, so its image is excluded
+    // by skipping any <img> inside a <table>.
+    const bodyImages = [...main.querySelectorAll('img')].filter((img) => {
+      if (img.closest('table')) return false; // inside the details/metadata block
+      const src = img.getAttribute('src') || '';
+      return src && !/logo|header|footer|\.svg(?:$|[?#])/i.test(src);
+    });
+    if (bodyImages.length > 1) {
+      // Build the carousel block table: header row "carousel", then one image
+      // per row (clone each image so it survives removal of its original <p>).
+      const cells = [['carousel']];
+      bodyImages.forEach((img) => {
+        cells.push([img.cloneNode(true)]);
+      });
+      const carousel = WebImporter.Blocks.createBlock(document, { name: 'carousel', cells });
+
+      // Remove the original inline image paragraphs/wrappers.
+      bodyImages.forEach((img) => {
+        const p = img.closest('p') || img.closest('picture') || img;
+        (p || img).remove();
+      });
+
+      // Place the carousel at the very top of the main content.
+      main.insertBefore(carousel, main.firstChild);
+    }
+
     const hr = document.createElement('hr');
     main.appendChild(hr);
     WebImporter.rules.createMetadata(main, document);
