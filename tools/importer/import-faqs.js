@@ -138,9 +138,39 @@ export default {
       }
     });
 
+    // Two-column layout: split the "Need more help?" content into its own EDS
+    // section (a section break = <hr>) so the CSS can place the main content
+    // (image + intro + accordion) in one column and "Need more help?" in the
+    // other. Everything from the "Need more help?" heading onward moves into a
+    // fresh trailing section.
+    const helpH2 = [...main.querySelectorAll('h2')].find(
+      (h) => /need more help/i.test(h.textContent),
+    );
+    if (helpH2) {
+      const sep = document.createElement('hr');
+      helpH2.parentNode.insertBefore(sep, helpH2);
+    }
+
     const hr = document.createElement('hr');
     main.appendChild(hr);
     WebImporter.rules.createMetadata(main, document);
+
+    // Template drives a body class (via decorateTemplateAndTheme) so the FAQ
+    // page can be styled with `body.faqs` scoped CSS (the two-column grid).
+    const metaTable = [...main.querySelectorAll('table')].find((t) => {
+      const c = t.querySelector('tr td, tr th');
+      return c && /^metadata$/i.test(c.textContent.trim());
+    });
+    if (metaTable && !/>\s*template\s*</i.test(metaTable.innerHTML)) {
+      const tbody = metaTable.querySelector('tbody') || metaTable;
+      const tr = document.createElement('tr');
+      const k = document.createElement('td');
+      k.textContent = 'Template';
+      const v = document.createElement('td');
+      v.textContent = 'faqs';
+      tr.append(k, v);
+      tbody.append(tr);
+    }
     WebImporter.rules.transformBackgroundImages(main, document);
     WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
 
