@@ -8,6 +8,9 @@
  * The instance selector matches a single "secure" teaser (one card). This
  * parser emits one card row for the matched element; the importer runs it per
  * matched instance so multiple members-only teasers each become a card row.
+ * The separate single-card blocks are then merged into one multi-card block by
+ * the import script (import-magazine-landing.js afterTransform) so the grid can
+ * lay them out 2-up.
  *
  * Convention (cards): 2-column block. Row 1 = block name. Each subsequent row
  * is one card: cell 1 = image, cell 2 = text content (title heading,
