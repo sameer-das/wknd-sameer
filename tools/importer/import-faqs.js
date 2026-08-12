@@ -110,6 +110,34 @@ export default {
 
     executeTransformers('afterTransform', main, payload);
 
+    // FAQ-specific accessibility tidy-ups on the "Need more help?" default
+    // content (it is not in a block, so we adjust it here):
+    //  - the source marks it up as an <h3> directly under the page <h1>, which
+    //    trips Lighthouse's sequential-heading rule; promote it to <h2>.
+    //  - the phone/email are dead href="#" anchors; make them tel:/mailto: so
+    //    they are meaningful, functional links.
+    const helpHeading = [...main.querySelectorAll('h3')].find(
+      (h) => /need more help/i.test(h.textContent),
+    );
+    if (helpHeading) {
+      const h2 = document.createElement('h2');
+      h2.id = helpHeading.id;
+      while (helpHeading.firstChild) h2.append(helpHeading.firstChild);
+      helpHeading.replaceWith(h2);
+    }
+    main.querySelectorAll('a[href="#"]').forEach((a) => {
+      const text = a.textContent.trim();
+      const telMatch = text.match(/[\d][\d\s\-().]{5,}\d/);
+      if (/@/.test(text)) {
+        // The email is split across text + anchor ("info" + "@wknd.com"); use a
+        // best-effort mailto built from the visible address fragment.
+        const addr = text.replace(/^[^a-z0-9@._-]*/i, '');
+        a.setAttribute('href', `mailto:info${addr.startsWith('@') ? '' : '@'}${addr}`);
+      } else if (telMatch) {
+        a.setAttribute('href', `tel:${telMatch[0].replace(/[^\d+]/g, '')}`);
+      }
+    });
+
     const hr = document.createElement('hr');
     main.appendChild(hr);
     WebImporter.rules.createMetadata(main, document);
