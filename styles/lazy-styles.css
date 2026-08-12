@@ -1,1 +1,81 @@
 /* add global styles that can be loaded post LCP here */
+
+/* ---------------------------------------------------------------------------
+   Magazine article page (body.article-page)
+   Matches the WKND source article layout: a centred, readable content column
+   with a serif title, an uppercase byline, airy body copy, and a large serif
+   pull-quote. Scoped to the article template so it never affects other pages.
+   --------------------------------------------------------------------------- */
+
+/* Constrain the article's default-content column to a comfortable reading
+   measure and centre it (source column ≈ 776px). */
+body.article-page main > .section > .default-content-wrapper {
+  max-width: 800px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+/* Title */
+body.article-page main h1 {
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  font-size: var(--heading-font-size-xl);
+  line-height: 1.5;
+  margin-bottom: 0.3em;
+}
+
+/* Byline — the article's H4 ("By <author>"), uppercase Source Sans */
+body.article-page main h1 + h4,
+body.article-page main h4:first-of-type {
+  margin-top: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+/* Body copy — airy line-height like the source (18px / ~2.2) */
+body.article-page main > .section > .default-content-wrapper p {
+  font-size: var(--body-font-size-m);
+  line-height: 2.1;
+  color: var(--text-color);
+}
+
+/* Inline article images: full column width, generous vertical rhythm */
+body.article-page main > .section p picture img {
+  width: 100%;
+  height: auto;
+  margin: 24px 0;
+}
+
+/* Pull-quote — large serif, centred, no bullet/indent, subtle accent */
+body.article-page main blockquote {
+  margin: 32px 0;
+  padding: 8px 0 8px 24px;
+  border-left: 4px solid var(--brand-color);
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  font-size: var(--heading-font-size-l);
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+/* Subheads within the article body */
+body.article-page main > .section > .default-content-wrapper h2,
+body.article-page main > .section > .default-content-wrapper h3 {
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+  margin-top: 1.2em;
+}
+
+/* The "SHARE THIS STORY" related list at the end reads as a simple list */
+body.article-page main h5 {
+  margin-top: 2em;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
