@@ -1,0 +1,84 @@
+/*
+ * Accordion Block — WKND on-brand styling
+ * Clean rows with subtle dividers, uppercase bold questions, a chevron marker
+ * that flips on open, generous padding, and a WKND-yellow accent on hover/open.
+ */
+
+.accordion .accordion-item {
+  border-bottom: 1px solid var(--light-color);
+}
+
+.accordion .accordion-item:first-child {
+  border-top: 1px solid var(--light-color);
+}
+
+.accordion .accordion-item-body p {
+  margin: 0 0 0.8em;
+}
+
+.accordion .accordion-item-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* Question / summary row */
+.accordion .accordion-item summary {
+  position: relative;
+  display: block; /* removes default disclosure triangle in most browsers */
+  padding: 20px 56px 20px 4px;
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-color);
+  list-style: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.accordion .accordion-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion .accordion-item summary:hover,
+.accordion .accordion-item summary:focus-visible {
+  color: #000;
+  outline: none;
+}
+
+.accordion .accordion-item summary:focus-visible {
+  outline: 2px solid var(--brand-color);
+  outline-offset: 2px;
+}
+
+/* Chevron marker that flips on open */
+.accordion .accordion-item summary::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--text-color);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.accordion .accordion-item summary:hover::after,
+.accordion .accordion-item summary:focus-visible::after {
+  border-color: var(--brand-color);
+}
+
+.accordion .accordion-item[open] summary::after {
+  transform: translateY(-30%) rotate(-135deg);
+}
+
+/* Answer / panel */
+.accordion .accordion-item-body {
+  padding: 0 56px 24px 4px;
+  font-size: var(--body-font-size-s);
+  line-height: 1.6;
+  color: var(--text-color);
+}

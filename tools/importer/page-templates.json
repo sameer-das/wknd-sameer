@@ -168,6 +168,22 @@
           ]
         }
       ]
+    },
+    {
+      "name": "faqs",
+      "urls": [
+        "https://wknd.site/us/en/faqs.html"
+      ],
+      "coverageGaps": [],
+      "description": "FAQs page: title, hero image, intro, an accordion of 7 Q&A items, and a Need more help contact section.",
+      "blocks": [
+        {
+          "name": "accordion",
+          "instances": [
+            "div.accordion.cmp-accordion, div.cmp-accordion"
+          ]
+        }
+      ]
     }
   ]
 }
