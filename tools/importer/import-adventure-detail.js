@@ -194,6 +194,29 @@ export default {
       main.insertBefore(carousel, main.firstChild);
     }
 
+    // Accessibility: normalize heading levels so the document outline never
+    // skips a level (Lighthouse/axe `heading-order`). The source leaves the
+    // adventure body with an h1 followed by a stray h5 ("Share this Adventure")
+    // and several h3 section titles — a 1->5 jump. Walk the headings in document
+    // order and demote any that jump more than one level below the previous.
+    // (Adventure pages have no heading-level-dependent CSS, so this is safe.)
+    const headings = [...main.querySelectorAll('h1, h2, h3, h4, h5, h6')]
+      .filter((h) => !h.closest('table')); // leave block-table headings alone
+    let prevLevel = 0;
+    headings.forEach((h) => {
+      const level = parseInt(h.tagName[1], 10);
+      const target = prevLevel === 0 ? level : Math.min(level, prevLevel + 1);
+      if (target !== level) {
+        const nh = document.createElement(`h${target}`);
+        [...h.attributes].forEach((a) => nh.setAttribute(a.name, a.value));
+        while (h.firstChild) nh.append(h.firstChild);
+        h.replaceWith(nh);
+        prevLevel = target;
+      } else {
+        prevLevel = level;
+      }
+    });
+
     const hr = document.createElement('hr');
     main.appendChild(hr);
     WebImporter.rules.createMetadata(main, document);
