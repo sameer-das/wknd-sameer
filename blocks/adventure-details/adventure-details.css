@@ -29,11 +29,14 @@
   max-width: 560px;
   margin: 0;
   padding: 0;
-  border: 1px solid var(--light-color);
-  border-left: 4px solid var(--brand-color);
+  /* border: 1px solid var(--light-color); */
+  /* border-left: 4px solid var(--brand-color); */
   border-radius: 4px;
   overflow: hidden;
   background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 /* Key/value row — stacked on mobile. */
@@ -42,13 +45,9 @@
   flex-direction: column;
   gap: 4px;
   padding: 12px 20px;
-  border-bottom: 1px solid #f0f0f0;
+  border-left: 4px solid #f0f0f0;
 }
 
-/* Zebra striping for scannability. */
-.adventure-details .adventure-details-row:nth-child(odd) {
-  background-color: #fafafa;
-}
 
 .adventure-details .adventure-details-row:last-child {
   border-bottom: 0;
@@ -78,10 +77,9 @@
 /* Tablet/desktop: spec-sheet layout — label left, value right. */
 @media (width >= 600px) {
   .adventure-details .adventure-details-row {
-    flex-direction: row;
     align-items: baseline;
     justify-content: space-between;
-    gap: 24px;
+    gap: 4px;
     padding: 14px 20px;
   }
 

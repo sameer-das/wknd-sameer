@@ -326,3 +326,24 @@ main .section.highlight {
   margin: 0;
   padding: 40px 0;
 }
+
+
+/* My Custom CSS */
+
+.adventure-details-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+
+  max-width: 1200px;
+  margin: auto !important;
+
+}
+
+.adventure-details-container .adventure-details-wrapper {
+  margin: 0;
+}
+
+.tabs-wrapper {
+  width: 100%;
+  margin: 0 !important;
+}
