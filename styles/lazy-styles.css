@@ -24,9 +24,11 @@ body.article-page main h1 {
   margin-bottom: 0.3em;
 }
 
-/* Byline — the article's H4 ("By <author>"), uppercase Source Sans */
-body.article-page main h1 + h4,
-body.article-page main h4:first-of-type {
+/* Byline — the article's "By <author>" line, uppercase Source Sans.
+   Tagged with .article-byline at decoration time; the heading level is
+   normalized for a valid outline, so styling is decoupled from the level.
+   Scoped as deep as the subhead rule below so it wins the cascade. */
+body.article-page main > .section > .default-content-wrapper .article-byline {
   margin-top: 0;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);
@@ -70,8 +72,11 @@ body.article-page main > .section > .default-content-wrapper h3 {
   margin-top: 1.2em;
 }
 
-/* The "SHARE THIS STORY" related list at the end reads as a simple list */
-body.article-page main h5 {
+/* The "SHARE THIS STORY" related list at the end reads as a simple list.
+   Tagged with .article-share at decoration time; its heading level is
+   normalized for a valid outline, so styling is decoupled from the level.
+   Scoped as deep as the subhead rule so it wins the cascade over it. */
+body.article-page main > .section > .default-content-wrapper .article-share {
   margin-top: 2em;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);

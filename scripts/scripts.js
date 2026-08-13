@@ -143,6 +143,45 @@ function decorateButtons(main) {
 }
 
 /**
+ * Normalizes heading levels so the document outline never skips a level
+ * (Lighthouse/axe `heading-order`). Walks headings in document order and demotes
+ * any that jump more than one level below the previous. Preserves attributes
+ * (id, class) by copying them onto the replacement element.
+ * @param {Element} main The container whose headings should be normalized
+ */
+function normalizeHeadingOrder(main) {
+  const headings = [...main.querySelectorAll('h1, h2, h3, h4, h5, h6')];
+  let prevLevel = 0;
+  headings.forEach((h) => {
+    const level = parseInt(h.tagName[1], 10);
+    const target = prevLevel === 0 ? level : Math.min(level, prevLevel + 1);
+    if (target !== level) {
+      const nh = document.createElement(`h${target}`);
+      [...h.attributes].forEach((a) => nh.setAttribute(a.name, a.value));
+      while (h.firstChild) nh.append(h.firstChild);
+      h.replaceWith(nh);
+      prevLevel = target;
+    } else {
+      prevLevel = level;
+    }
+  });
+}
+
+/**
+ * Magazine article decoration. The source markup styles the byline and the
+ * "SHARE THIS STORY" list by heading level (h4/h5), but those levels skip the
+ * outline (h1 -> h4, h2 -> h5). Tag them with classes so styling is decoupled
+ * from level, then normalize levels for a valid heading order.
+ * @param {Element} main The main element
+ */
+function decorateArticleHeadings(main) {
+  const byline = main.querySelector('h4');
+  if (byline) byline.classList.add('article-byline');
+  main.querySelectorAll('h5').forEach((h) => h.classList.add('article-share'));
+  normalizeHeadingOrder(main);
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -153,6 +192,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  if (document.body.classList.contains('article-page')) decorateArticleHeadings(main);
 }
 
 /**
