@@ -29,6 +29,7 @@
 
 .cards-members .cards-members-card-image a {
   display: block;
+  
 }
 
 .cards-members > ul > li img {
@@ -38,9 +39,9 @@
   transition: transform 0.4s ease;
 }
 
-.cards-members > ul > li:hover img {
+/* .cards-members > ul > li:hover img {
   transform: scale(1.04);
-}
+} */
 
 /* Body */
 .cards-members .cards-members-card-body {
@@ -62,14 +63,20 @@
   line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  color: var(--text-color);
+  /* color: var(--text-color); */
+  color: #696969;
 }
 
 .cards-members .cards-members-card-body p {
-  margin: 9px 0 0;
+  margin: 8px 0 0;
   font-size: var(--body-font-size-s);
   line-height: 1.5;
   color: #696969;
+}
+
+.cards-members .cards-members-card-body p:has(> a) {
+   margin: 16px 0 0;
+   padding: 14px 0;
 }
 
 /* "Read More" CTA — WKND yellow primary button treatment */
@@ -78,13 +85,18 @@
 }
 
 .cards-members .cards-members-card-body a {
-  color: var(--link-color);
+  /* color: var(--link-color); */
+  color: #696969;
+  padding: 14px 36px;
+  text-decoration: none;
+  background-color: var(--brand-color);
 }
 
 main .cards-members .cards-members-card-body a.button:any-link {
   border-color: var(--brand-color);
   background-color: var(--brand-color);
-  color: var(--text-color);
+  /* color: var(--text-color); */
+  color: #696969;
 }
 
 main .cards-members .cards-members-card-body a.button:hover,
@@ -93,6 +105,7 @@ main .cards-members .cards-members-card-body a.button:focus-visible {
   background-color: var(--brand-hover-color);
   color: var(--text-color);
   text-decoration: none;
+  cursor: not-allowed;
 }
 
 /* 2-up on wider viewports */
@@ -101,3 +114,4 @@ main .cards-members .cards-members-card-body a.button:focus-visible {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
