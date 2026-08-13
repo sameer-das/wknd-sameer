@@ -52,15 +52,18 @@ export default function decorate(block) {
   block.setAttribute('aria-roledescription', 'carousel');
   block.setAttribute('aria-label', 'Image gallery');
 
-  // Collect the images from the authored rows into slides.
+  // Collect the images from the authored rows into slides. The track/slides use
+  // <div>s (not <ul>/<li>) so the ARIA carousel roles (group/slide) are valid —
+  // role="group" is not allowed on a list item, and role-bearing children make
+  // a <ul> an invalid list (both flagged by axe/Lighthouse).
   const rows = [...block.children];
-  const track = document.createElement('ul');
+  const track = document.createElement('div');
   track.className = 'carousel-track';
 
   rows.forEach((row, i) => {
     const img = row.querySelector('img');
     if (!img) return;
-    const slide = document.createElement('li');
+    const slide = document.createElement('div');
     slide.className = 'carousel-slide';
     slide.id = `carousel-${id}-slide-${i}`;
     slide.setAttribute('role', 'group');
