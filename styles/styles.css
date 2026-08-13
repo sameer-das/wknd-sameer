@@ -333,7 +333,6 @@ main .section.highlight {
 .adventure-details-container {
   display: grid;
   grid-template-columns: 1fr 2fr;
-
   max-width: 1200px;
   margin: auto !important;
 
