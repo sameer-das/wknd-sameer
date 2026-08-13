@@ -61,8 +61,8 @@ footer .footer .default-content-wrapper ul a:any-link {
   letter-spacing: 0.02em;
 }
 
-/* "Follow Us" heading */
-footer .footer h4 {
+/* "Follow Us" heading (promoted from the authored h4 to h2 for heading order) */
+footer .footer h2 {
   margin: 0;
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-s);
@@ -139,7 +139,7 @@ footer .footer .social-links-wrapper {
     gap: 8px;
   }
 
-  footer .footer .default-content-wrapper:has(ul) h4 {
+  footer .footer .default-content-wrapper:has(ul) h2 {
     margin-left: auto;
   }
 
