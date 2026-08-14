@@ -1,4 +1,4 @@
-.columns > div {
+.columns>div {
   display: flex;
   flex-direction: column;
 }
@@ -7,27 +7,50 @@
   width: 100%;
 }
 
-.columns > div > div {
+.columns>div>div {
   order: 1;
 }
 
-.columns > div > .columns-img-col {
+.columns>div>.columns-img-col {
   order: 0;
 }
 
-.columns > div > .columns-img-col img {
+.columns>div>.columns-img-col img {
   display: block;
 }
 
-@media (width >= 900px) {
-  .columns > div {
+@media (width >=900px) {
+  .columns>div {
     align-items: center;
     flex-direction: unset;
     gap: 24px;
   }
 
-  .columns > div > div {
+  .columns>div>div {
     flex: 1;
     order: unset;
   }
+}
+
+/* My custom styles */
+.columns.magazine-details > div {
+  max-width: 1200px;
+  margin-inline: auto;
+  align-items: flex-start;
+}
+.columns.magazine-details > div > div:nth-child(1) {
+  /* border: 1px solid red; */
+  flex: 70%;
+}
+
+.columns.magazine-details > div > div:nth-child(2) {
+  border: 1px solid yellow;
+  flex: 30%;
+}
+
+.col-1 > ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }

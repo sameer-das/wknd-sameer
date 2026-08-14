@@ -105,8 +105,9 @@ main .cards-members .cards-members-card-body a.button:focus-visible {
   background-color: var(--brand-hover-color);
   color: var(--text-color);
   text-decoration: none;
-  cursor: not-allowed;
 }
+
+
 
 /* 2-up on wider viewports */
 @media (width >= 900px) {

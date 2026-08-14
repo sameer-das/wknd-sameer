@@ -20,7 +20,8 @@
   --link-hover-color: #7a7a7a;
 
   /* WKND brand */
-  --brand-color: #ffea00; /* WKND yellow — CTAs */
+  --brand-color: #ffea00;
+  /* WKND yellow — CTAs */
   --brand-hover-color: #d6c400;
   --footer-bg-color: #202020;
   --footer-text-color: #ebebeb;
@@ -59,7 +60,7 @@
   src: local('Georgia');
 }
 
-@media (width >= 900px) {
+@media (width >=900px) {
   :root {
     /* heading sizes */
     --heading-font-size-xxl: 56px;
@@ -108,17 +109,35 @@ h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 400; /* Asar is a single-weight serif */
+  font-weight: 400;
+  /* Asar is a single-weight serif */
   line-height: 1.25;
   scroll-margin: 40px;
 }
 
-h1 { font-size: var(--heading-font-size-xxl); }
-h2 { font-size: var(--heading-font-size-xl); }
-h3 { font-size: var(--heading-font-size-l); }
-h4 { font-size: var(--heading-font-size-m); }
-h5 { font-size: var(--heading-font-size-s); }
-h6 { font-size: var(--heading-font-size-xs); }
+h1 {
+  font-size: var(--heading-font-size-xxl);
+}
+
+h2 {
+  font-size: var(--heading-font-size-xl);
+}
+
+h3 {
+  font-size: var(--heading-font-size-l);
+}
+
+h4 {
+  font-size: var(--heading-font-size-m);
+}
+
+h5 {
+  font-size: var(--heading-font-size-s);
+}
+
+h6 {
+  font-size: var(--heading-font-size-xs);
+}
 
 p,
 dl,
@@ -143,7 +162,7 @@ pre {
   white-space: pre;
 }
 
-main > div {
+main>div {
   margin: 40px 16px;
 }
 
@@ -180,7 +199,8 @@ button.button {
   max-width: 100%;
   margin: 0;
   border: 2px solid transparent;
-  border-radius: 0; /* WKND CTAs are rectangular */
+  border-radius: 0;
+  /* WKND CTAs are rectangular */
   padding: 14px 35px;
   font: inherit;
   font-weight: 600;
@@ -299,22 +319,22 @@ main img {
 }
 
 /* sections */
-main > .section {
+main>.section {
   margin: 40px 0;
 }
 
-main > .section > div {
+main>.section>div {
   max-width: 1200px;
   margin: auto;
   padding: 0 24px;
 }
 
-main > .section:first-of-type {
+main>.section:first-of-type {
   margin-top: 0;
 }
 
-@media (width >= 900px) {
-  main > .section > div {
+@media (width >=900px) {
+  main>.section>div {
     padding: 0 32px;
   }
 }

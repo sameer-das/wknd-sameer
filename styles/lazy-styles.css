@@ -10,7 +10,7 @@
 /* Constrain the article's default-content column to a comfortable reading
    measure and centre it (source column ≈ 776px). */
 body.article-page main > .section > .default-content-wrapper {
-  max-width: 800px;
+  max-width: 1200px;
   margin-inline: auto;
   padding-inline: 24px;
 }
