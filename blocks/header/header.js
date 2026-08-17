@@ -172,6 +172,35 @@ export default async function decorate(block) {
         }
       });
     });
+
+    // Mark the nav link for the current page with aria-current="page" so it gets
+    // an active style. Uses a section match: a link is active when the current
+    // path equals it, or starts with it (e.g. /magazine/ski-touring activates
+    // the "Magazine" link). The home link ("/") only matches the exact home
+    // path. When several links match, the longest (most specific) one wins.
+    const normalize = (p) => {
+      const path = p.replace(/\.html$/, '').replace(/\/+$/, '');
+      return path === '' ? '/' : path;
+    };
+    const currentPath = normalize(window.location.pathname);
+    let bestLink = null;
+    let bestLen = -1;
+    navSections.querySelectorAll('a[href]').forEach((a) => {
+      let linkPath;
+      try {
+        linkPath = normalize(new URL(a.href, window.location.href).pathname);
+      } catch (e) {
+        return;
+      }
+      const matches = linkPath === '/'
+        ? currentPath === '/'
+        : (currentPath === linkPath || currentPath.startsWith(`${linkPath}/`));
+      if (matches && linkPath.length > bestLen) {
+        bestLink = a;
+        bestLen = linkPath.length;
+      }
+    });
+    if (bestLink) bestLink.setAttribute('aria-current', 'page');
   }
 
   // hamburger for mobile
