@@ -243,6 +243,13 @@ header nav .nav-sections ul > li > a:focus-visible {
   text-decoration: none;
 }
 
+/* active/current page item (mobile stacked menu) */
+header nav .nav-sections ul > li > a[aria-current='page'],
+header nav .nav-sections ul > li[aria-current='page'] > a {
+  color: var(--brand-color);
+  font-weight: 600;
+}
+
 @media (width >= 900px) {
   header nav .nav-sections {
     display: block;
@@ -323,9 +330,11 @@ header nav .nav-sections ul > li > a:focus-visible {
     text-decoration: none;
   }
 
-  /* active/current page item gets a persistent brand underline */
+  /* active/current page item gets brand-color text + a persistent underline */
   header nav .nav-sections ul > li > a[aria-current='page'],
   header nav .nav-sections ul > li[aria-current='page'] > a {
+    color: var(--brand-color);
+    font-weight: 600;
     box-shadow: inset 0 -3px 0 0 var(--brand-color);
   }
 
