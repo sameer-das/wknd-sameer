@@ -34,7 +34,7 @@
 
 .article-author .article-author-body p {
   margin: 0;
-  color: #6f6f6f;
+  color: var(--primary-grey);
   font-size: var(--body-font-size-s, 0.875rem);
 }
 

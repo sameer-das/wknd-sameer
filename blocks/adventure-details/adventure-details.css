@@ -64,7 +64,7 @@
   line-height: 1.4;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #696969;
+  color: var(--primary-grey);
 }
 
 /* Value — body color, semibold (source: weight 600 / #202020). */

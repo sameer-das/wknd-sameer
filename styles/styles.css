@@ -18,9 +18,11 @@
   --text-color: #202020;
   --link-color: #202020;
   --link-hover-color: #7a7a7a;
+  --primary-grey: #696969;
 
   /* WKND brand */
   --brand-color: #ffea00;
+
   /* WKND yellow — CTAs */
   --brand-hover-color: #d6c400;
   --footer-bg-color: #202020;
@@ -110,6 +112,7 @@ h6 {
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
   font-weight: 400;
+
   /* Asar is a single-weight serif */
   line-height: 1.25;
   scroll-margin: 40px;
@@ -200,6 +203,7 @@ button.button {
   margin: 0;
   border: 2px solid transparent;
   border-radius: 0;
+
   /* WKND CTAs are rectangular */
   padding: 14px 35px;
   font: inherit;

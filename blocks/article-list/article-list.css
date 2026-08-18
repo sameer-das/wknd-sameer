@@ -67,7 +67,7 @@
   margin: 12px 0 0;
   font-size: var(--body-font-size-xs);
   line-height: 1.5;
-  color: #696969;
+  color: var(--primary-grey);
 }
 
 /* author · date */
@@ -76,5 +76,5 @@
   font-size: 13px;
   line-height: 1.4;
   letter-spacing: 0.02em;
-  color: #696969;
+  color: var(--primary-grey);
 }

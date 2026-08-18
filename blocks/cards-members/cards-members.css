@@ -63,15 +63,16 @@
   line-height: 1.5;
   text-transform: uppercase;
   letter-spacing: 0.02em;
+
   /* color: var(--text-color); */
-  color: #696969;
+  color: var(--primary-grey);
 }
 
 .cards-members .cards-members-card-body p {
   margin: 8px 0 0;
   font-size: var(--body-font-size-s);
   line-height: 1.5;
-  color: #696969;
+  color: var(--primary-grey);
 }
 
 .cards-members .cards-members-card-body p:has(> a) {
@@ -86,7 +87,7 @@
 
 .cards-members .cards-members-card-body a {
   /* color: var(--link-color); */
-  color: #696969;
+  color: var(--primary-grey);
   padding: 14px 36px;
   text-decoration: none;
   background-color: var(--brand-color);
@@ -95,8 +96,9 @@
 main .cards-members .cards-members-card-body a.button:any-link {
   border-color: var(--brand-color);
   background-color: var(--brand-color);
+
   /* color: var(--text-color); */
-  color: #696969;
+  color: var(--primary-grey);
 }
 
 main .cards-members .cards-members-card-body a.button:hover,

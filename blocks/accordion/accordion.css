@@ -41,11 +41,6 @@
   display: none;
 }
 
-.accordion .accordion-item summary:hover,
-.accordion .accordion-item summary:focus-visible {
-  color: #000;
-  outline: none;
-}
 
 .accordion .accordion-item summary:focus-visible {
   outline: 2px solid var(--brand-color);
