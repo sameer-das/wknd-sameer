@@ -1,4 +1,4 @@
-.cards > ul {
+.cards>ul {
   list-style: none;
   margin: 0;
   padding: 0;
@@ -7,7 +7,7 @@
   gap: 24px;
 }
 
-.cards > ul > li {
+.cards>ul>li {
   border: 1px solid #dadada;
   background-color: var(--background-color);
 }
@@ -20,8 +20,80 @@
   line-height: 0;
 }
 
-.cards > ul > li img {
+.cards>ul>li img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+}
+
+
+/* My Custom CSS */
+
+/* For member only cards */
+
+.cards.members>ul {
+  grid-template-columns: 1fr 1fr;
+}
+
+.cards.members>ul>li {
+  position: relative;
+}
+
+.cards.members>ul>li::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: rgb(0 0 0 / 30%);
+  top: 0;
+  left: 0;
+}
+
+.cards.members>ul>li::after {
+  content: 'Sign In';
+  position: absolute;
+  width: 100px;
+  z-index: 2;
+  background-color: var(--brand-color);
+  top: 0;
+  left: 0;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.cards.members .cards-card-body a {
+  display: inline-block;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--brand-color);
+  color: var(--text-color);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.cards.members .cards-card-body h2,
+.cards.members .cards-card-body h3,
+.cards.members .cards-card-body h4 {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--primary-grey);
+}
+
+.cards.members .cards-card-body p {
+  margin: 8px 0 0;
+  font-size: var(--body-font-size-s);
+  line-height: 1.5;
+  color: var(--primary-grey);
 }

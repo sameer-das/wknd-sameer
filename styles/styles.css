@@ -370,3 +370,20 @@ main .section.highlight {
   width: 100%;
   margin: 0 !important;
 }
+
+/* For the links authored in index */
+.recent-article .default-content-wrapper p a,
+.where-to-go .default-content-wrapper p a,
+.next-adventures .hero-wrapper div:last-child p a {
+  display: inline-block;
+  padding: 14px 35px;
+  border: 0;
+  border-radius: 0;
+  background-color: var(--brand-color);
+  color: var(--text-color);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: uppercase;
+  text-decoration: none;
+}
