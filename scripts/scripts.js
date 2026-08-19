@@ -158,6 +158,9 @@ function normalizeHeadingOrder(main) {
     if (target !== level) {
       const nh = document.createElement(`h${target}`);
       [...h.attributes].forEach((a) => nh.setAttribute(a.name, a.value));
+      // Preserve the authored visual level so promoting a heading for a valid
+      // outline never changes its appearance (styling keys off this class).
+      nh.classList.add(`heading-visual-h${level}`);
       while (h.firstChild) nh.append(h.firstChild);
       h.replaceWith(nh);
       prevLevel = target;
@@ -192,7 +195,14 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
-  if (document.body.classList.contains('article-page')) decorateArticleHeadings(main);
+  if (document.body.classList.contains('article-page')) {
+    decorateArticleHeadings(main);
+  } else {
+    // Keep a valid heading outline on every page (e.g. adventure detail pages
+    // author an h3 in the Overview tab directly under the page h1). Runs after
+    // decoration so any block-generated headings are included.
+    normalizeHeadingOrder(main);
+  }
 }
 
 /**

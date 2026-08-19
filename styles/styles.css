@@ -46,17 +46,29 @@
   --nav-height: 88px;
 }
 
-/* fallback fonts — size-adjusted to minimize CLS before webfonts load */
+/* Fallback fonts — metric-matched to the webfonts so text does not re-wrap or
+   change line height when the webfont swaps in (main cause of font-driven CLS).
+   Multiple local() candidates so the face resolves across OSes (Arial on
+   Win/Mac, Liberation Sans/Arimo/DejaVu on Linux & the PSI test runner).
+   size-adjust matches character width (Source Sans is ~0.82x its fallback,
+   Asar ~0.83x); ascent/descent-override match the vertical line box (matters
+   for headings at line-height 1.25, where font metrics exceed the line box). */
 @font-face {
   font-family: source-sans-fallback;
-  size-adjust: 100%;
-  src: local('Arial');
+  size-adjust: 81.6%;
+  ascent-override: 98.4%;
+  descent-override: 27.3%;
+  line-gap-override: 0%;
+  src: local('Arial'), local('Liberation Sans'), local('Arimo'), local('Helvetica Neue'), local('DejaVu Sans');
 }
 
 @font-face {
   font-family: asar-fallback;
-  size-adjust: 105%;
-  src: local('Georgia');
+  size-adjust: 83%;
+  ascent-override: 119.6%;
+  descent-override: 55.7%;
+  line-gap-override: 0%;
+  src: local('Georgia'), local('Liberation Serif'), local('Tinos'), local('Times New Roman'), local('DejaVu Serif');
 }
 
 @media (width >= 900px) {
@@ -119,6 +131,14 @@ h3 { font-size: var(--heading-font-size-l); }
 h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
+
+/* When a heading is promoted for a valid outline (see normalizeHeadingOrder in
+   scripts.js), keep its authored visual size so appearance is unchanged. */
+.heading-visual-h2 { font-size: var(--heading-font-size-xl); }
+.heading-visual-h3 { font-size: var(--heading-font-size-l); }
+.heading-visual-h4 { font-size: var(--heading-font-size-m); }
+.heading-visual-h5 { font-size: var(--heading-font-size-s); }
+.heading-visual-h6 { font-size: var(--heading-font-size-xs); }
 
 p,
 dl,
