@@ -407,3 +407,21 @@ main .section.highlight {
   text-transform: uppercase;
   text-decoration: none;
 }
+
+.where-to-go .cards > ul > li >div > p {
+  width: var(100% - 32px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-transform: ellipse;
+
+}
+
+.where-to-go .cards > ul > li >div > h3 {
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  font-family: var(--body-font-family);
+}
+
+.where-to-go .cards > ul > li >div > h3 a {
+  text-decoration: none;
+}
