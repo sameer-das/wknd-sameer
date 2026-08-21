@@ -97,3 +97,26 @@
   line-height: 1.5;
   color: var(--primary-grey);
 }
+
+
+
+/* My Custom CSS */
+
+
+.cards.where-to-go > ul > li >div > p {
+  width: var(100% - 32px);
+  white-space: nowrap;
+  overflow: hidden;
+  text-transform: ellipse;
+
+}
+
+.cards.where-to-go > ul > li >div > h3 {
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  font-family: var(--body-font-family);
+}
+
+.cards.where-to-go > ul > li >div > h3 a {
+  text-decoration: none;
+}
